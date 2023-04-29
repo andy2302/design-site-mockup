@@ -1,5 +1,5 @@
 .App {
-  font-family: 'Arial', sans-serif;
+  font-family: 'Montserrat';
 }
 
 .navbar {
@@ -27,6 +27,7 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+  padding-right: 1rem;
   display: flex;
 }
 

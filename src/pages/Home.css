@@ -16,3 +16,27 @@
     max-width: 20%; /* Adjust this value based on your preference */
   }
   
+  .content {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+  
+  .graphic-container {
+    display: flex;
+    justify-content: left;
+    padding: 2rem;
+  }
+  
+  .graphic1-image {
+    width: 500px;
+    height: auto;
+    display: inline-block;
+    margin-top: 2rem;
+    margin-left: 5rem;
+  }
+  
+  .graphic-text{
+    margin-left: 2rem;
+    max-width: 60%;
+  }
