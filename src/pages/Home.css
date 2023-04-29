@@ -1,0 +1,18 @@
+.banner-container {
+    position: relative;
+  }
+  
+  .banner-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+  }
+  
+  .overlay-logo {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 20%; /* Adjust this value based on your preference */
+  }
+  
