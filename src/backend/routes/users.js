@@ -2,9 +2,9 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const router = express.Router();
-const User = require('../models/User');
+const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
-const config = require('config');
+const config = require('../config/default.json');
 
 router.post('/register', async (req, res) => {
   const { firstName, lastName, email, password, age, gender, phone, facebook, twitter, instagram } = req.body;
@@ -65,11 +65,11 @@ router.post('/login', async (req, res) => {
   
       jwt.sign(
         payload,
-        config.get('jwtSecret'),
+        config.jwtSecret,
         { expiresIn: '1h' },
         (err, token) => {
           if (err) throw err;
-          res.json({ token });
+          res.json({ token, user });
         }
       );
     } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 
 function Signup() {
@@ -16,6 +16,8 @@ function Signup() {
     instagram: '',
   });
 
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
@@ -23,7 +25,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/users/register', {
+      const response = await fetch('http://localhost:5000/api/users/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,12 +33,13 @@ function Signup() {
         body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
-        alert('User registered successfully');
-      } else {
-        const data = await response.json();
-        alert(data.message);
+      if (!response.ok) {
+        throw new Error('Error registering user');
       }
+
+      const responseData = await response.json();
+      alert(responseData.message);
+      navigate('/login');
     } catch (error) {
       console.error(error);
       alert('Error registering user');

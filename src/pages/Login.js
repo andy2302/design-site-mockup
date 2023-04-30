@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import './Login.css';
 
 function Login() {
+  const { setUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
 
@@ -20,10 +23,13 @@ function Login() {
         },
         body: JSON.stringify(formData),
       });
-
+  
+      console.log('Response status:', response.status, 'statusText:', response.statusText);
+  
       if (response.ok) {
         const data = await response.json();
         localStorage.setItem('token', data.token);
+        setUser(data.user);
         navigate('/'); // Redirect to the homepage
       } else {
         const data = await response.json();
@@ -38,19 +44,19 @@ function Login() {
   return (
     <div className="login-page">
       <h2>Login</h2>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Email:</label>
-          <input type="email" name="email" required />
+          <input type="email" name="email" required onChange={handleChange} />
         </div>
         <div className="form-group">
           <label>Password:</label>
-          <input type="password" name="password" required />
+          <input type="password" name="password" required onChange={handleChange} />
         </div>
         <button type="submit">Login</button>
         <p>
-        Don't have an account? <Link to="/signup">Sign up here!</Link>.
-      </p>
+          Don't have an account? <Link to="/signup">Sign up here!</Link>.
+        </p>
       </form>
     </div>
   );

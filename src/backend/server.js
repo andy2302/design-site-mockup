@@ -18,3 +18,9 @@ app.use('/api/auth', authRouter);
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).send('Something went wrong');
+  });
+  
