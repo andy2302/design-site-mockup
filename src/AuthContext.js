@@ -4,10 +4,11 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
+    const storedToken = localStorage.getItem('token');
+    if (storedToken) {
       // Fetch user data using the token
       const fetchUser = async () => {
         try {
@@ -15,13 +16,14 @@ export const AuthProvider = ({ children }) => {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
-              'x-auth-token': token,
+              'Authorization': `Bearer ${storedToken}`,
             },
           });
 
           if (response.ok) {
             const userData = await response.json();
             setUser(userData);
+            setToken(storedToken);
           } else {
             localStorage.removeItem('token');
           }
@@ -34,7 +36,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ user, setUser, token, setToken }}>
       {children}
     </AuthContext.Provider>
   );

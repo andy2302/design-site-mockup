@@ -1,0 +1,18 @@
+.order-form {
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    max-width: 90%;
+    margin-right: 10px;
+  }
+  
+  .order-form label {
+    margin-right: 10px;
+  }
+  
+  .order-form input,
+  .order-form textarea {
+    margin-bottom: 10px;
+    display: block;
+  }
