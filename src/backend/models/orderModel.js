@@ -1,6 +1,18 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+  serviceName: {
+    type: String,
+    required: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
+  userEmail: {
+    type: String,
+    required: true,
+  },
   subject: {
     type: String,
     required: true,
@@ -12,14 +24,6 @@ const orderSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  userName: {
-    type: String,
-    required: true,
-  },
-  userEmail: {
-    type: String,
-    required: true,
   },
   // Add more fields as needed
 });

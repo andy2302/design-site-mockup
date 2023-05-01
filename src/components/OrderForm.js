@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { AuthContext } from '../AuthContext';
 import './OrderForm.css';
 
-function OrderForm() {
+function OrderForm( { serviceName } ) {
   const authContext = useContext(AuthContext);
   const token = authContext.token;
   const [formData, setFormData] = useState({ subject: '', description: '' });
@@ -24,6 +24,7 @@ function OrderForm() {
       },
       body: JSON.stringify({
         ...formData,
+        serviceName,
         userName: `${authContext.user.firstName} ${authContext.user.lastName}`,
         userEmail: authContext.user.email,
       }),
