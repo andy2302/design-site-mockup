@@ -11,7 +11,7 @@ function Navbar() {
   const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
-    navigate('/');
+    window.location.href = '/';
   };
 
   return (

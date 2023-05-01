@@ -30,7 +30,7 @@ function Login() {
         const data = await response.json();
         localStorage.setItem('token', data.token);
         setUser(data.user);
-        navigate('/'); // Redirect to the homepage
+        window.location.href = '/'; // Redirect to the homepage and refresh the page
       } else {
         const data = await response.json();
         alert(data.message);
