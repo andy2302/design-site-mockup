@@ -1,0 +1,28 @@
+.service-page-content{
+    padding-top: 44px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.service {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .service h3 {
+    margin-right: 10px;
+  }
+  
+  .buy-button {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  

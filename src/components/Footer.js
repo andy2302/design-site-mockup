@@ -1,8 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
+import { Link } from 'react-router-dom';
 import './Footer.css';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
+  const { user, setUser } = useContext(AuthContext);
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('token');
+  };
 
   return (
     <footer className="footer">
@@ -12,7 +20,7 @@ function Footer() {
           <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/services">Services</a></li>
+            {user &&(<li><a href="/services">Services</a></li>)}
           </ul>
         </div>
         <div className="footer-section">
