@@ -21,6 +21,7 @@ function Profile() {
     if (authContext.user) {
       setFormData({ ...formData, ...authContext.user });
     }
+    // eslint-disable-next-line
   }, [authContext.user]);
 
   const handleChange = (e) => {

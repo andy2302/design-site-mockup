@@ -1,3 +1,4 @@
+const morgan = require('morgan');
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -7,6 +8,8 @@ const authRouter = require('./routes/auth');
 const ordersRouter = require('./routes/orders');
 const app = express();
 const port = process.env.PORT || 5000;
+
+app.use(morgan('dev'));
 
 connectDB();
 

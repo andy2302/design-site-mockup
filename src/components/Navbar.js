@@ -27,9 +27,16 @@ function Navbar() {
           <Link to="/about" className="navbar-link">About</Link>
         </li>
         {user && (
-          <li className="navbar-item">
-            <Link to="/services" className="navbar-link">Services</Link>
-          </li>
+          <>
+            <li className="navbar-item">
+              <Link to="/services" className="navbar-link">Services</Link>
+            </li>
+            {user.isAdmin && (
+              <li className="navbar-item">
+                <Link to="/admin" className="navbar-link">Admin</Link>
+              </li>
+            )}
+          </>
         )}
         {user ? (
           <li className="navbar-item dropdown">

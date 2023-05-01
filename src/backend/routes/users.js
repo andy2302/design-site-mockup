@@ -132,5 +132,62 @@ router.post('/login', async (req, res) => {
     }
   });
  
+  router.get('/all', auth, async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id);
+      if (!currentUser.isAdmin) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+  
+      const users = await User.find({});
+      res.json(users);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+
+  router.put('/make-admin/:id', auth, async (req, res) => {
+    try {
+      const currentUser = await User.findById(req.user.id);
+      if (!currentUser.isAdmin) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+  
+      const user = await User.findByIdAndUpdate(
+        req.params.id,
+        { $set: { isAdmin: true } },
+        { new: true }
+      );
+  
+      res.json({ message: 'User promoted to admin', user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+
+  router.put('/demote-admin/:id', auth, async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      if (user.isAdmin === false) {
+        return res.status(400).json({ message: 'User is not an admin' });
+      }
+  
+      user.isAdmin = false;
+      await user.save();
+  
+      res.json({ message: 'User demoted successfully', user });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+  
 
 module.exports = router;
