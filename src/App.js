@@ -6,6 +6,7 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile';
 import Footer from './components/Footer';
 import './App.css';
 import { AuthProvider } from './AuthContext';
@@ -22,6 +23,7 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/profile" element={<Profile />} /> 
           </Routes>
           <Footer />
         </div>

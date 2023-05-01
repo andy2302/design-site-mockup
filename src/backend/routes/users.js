@@ -89,4 +89,48 @@ router.post('/login', async (req, res) => {
     }
   });
 
+  router.put('/:id', auth, async (req, res) => {
+    const { firstName, lastName, email, password, age, gender, phone, facebook, twitter, instagram } = req.body;
+  
+    try {
+      const user = await User.findById(req.params.id);
+  
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      if (user.id.toString() !== req.user.id) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
+  
+      const updateUserFields = {
+        firstName,
+        lastName,
+        email,
+        age,
+        gender,
+        phone,
+        facebook,
+        twitter,
+        instagram,
+      };
+  
+      if (password) {
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        updateUserFields.password = hashedPassword;
+      }
+  
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+        $set: updateUserFields,
+      }, { new: true });
+  
+      res.json({ message: 'User updated successfully', updatedUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+ 
+
 module.exports = router;

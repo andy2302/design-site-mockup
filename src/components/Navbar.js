@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import '../App.css';
 
 function Navbar() {
   const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const logout = () => {
     setUser(null);
     localStorage.removeItem('token');
+    navigate('/');
   };
 
   return (
@@ -33,6 +35,7 @@ function Navbar() {
           <li className="navbar-item dropdown">
             <span className="navbar-link dropdown-toggle">{user.firstName}</span>
             <div className="dropdown-content">
+              <button onClick={() => navigate('/profile')}>Profile</button>
               <button onClick={logout}>Logout</button>
             </div>
           </li>
