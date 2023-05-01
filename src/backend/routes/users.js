@@ -5,6 +5,17 @@ const router = express.Router();
 const User = require('../models/Users');
 const jwt = require('jsonwebtoken');
 const config = require('../config/default.json');
+const auth = require('../middleware/auth');
+
+router.get('/me', auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
 
 router.post('/register', async (req, res) => {
   const { firstName, lastName, email, password, age, gender, phone, facebook, twitter, instagram } = req.body;
