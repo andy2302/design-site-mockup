@@ -24,4 +24,39 @@ router.post('/', authMiddleware, async (req, res) => {
   }
 });
 
+// Add a new route to get all orders
+router.get('/all', authMiddleware, async (req, res) => {
+  console.log('Fetching all orders');
+  try {
+    const orders = await Order.find({});
+    console.log('Orders fetched:', orders);
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    res.status(500).json({ message: 'Error fetching orders', error: error.message });
+  }
+});
+
+router.patch('/:orderId', authMiddleware, async (req, res) => {
+  try {
+    const { orderId } = req.params;
+    const { status } = req.body;
+
+    const order = await Order.findById(orderId);
+
+    if (!order) {
+      return res.status(404).json({ message: 'Order not found' });
+    }
+
+    order.status = status;
+    await order.save();
+
+    res.status(200).json(order);
+  } catch (error) {
+    console.error('Error updating order status:', error);
+    res.status(500).json({ message: 'Error updating order status', error: error.message });
+  }
+});
+
+
 module.exports = router;

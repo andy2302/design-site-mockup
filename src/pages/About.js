@@ -6,6 +6,7 @@ import victorImage from '../assets/victor.jpg';
 import alexImage from '../assets/alex.jpg';
 import './About.css';
 import { Carousel } from 'react-responsive-carousel';
+import './carouselOverrides.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 function About() {

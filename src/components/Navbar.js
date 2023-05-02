@@ -36,6 +36,11 @@ function Navbar() {
                 <Link to="/admin" className="navbar-link">Admin</Link>
               </li>
             )}
+            {user.isAdmin && (
+              <li className="navbar-item">
+                <Link to="/orders" className="navbar-link">Orders</Link>
+              </li>
+            )}
           </>
         )}
         {user ? (

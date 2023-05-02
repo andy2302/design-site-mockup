@@ -1,0 +1,15 @@
+.carousel .control-prev.control-arrow:before,
+.carousel .control-next.control-arrow:before {
+  opacity: 0;
+}
+
+.carousel:hover .control-prev.control-arrow:before,
+.carousel:hover .control-next.control-arrow:before {
+  opacity: 1;
+}
+
+.carousel .control-arrow {
+    background: none !important;
+    border: none !important;
+  }
+  

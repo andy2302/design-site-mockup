@@ -7,6 +7,7 @@ import Services from './pages/Services';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Orders from './pages/Orders';
 import Footer from './components/Footer';
 import Admin from './components/Admin';
 import './App.css';
@@ -26,6 +27,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/orders" element={<Orders />} />
           </Routes>
           <Footer />
         </div>
